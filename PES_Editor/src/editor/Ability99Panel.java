@@ -189,6 +189,7 @@ public class Ability99Panel extends JPanel implements ActionListener,CaretListen
 	{
 		JTextField tf = (JTextField) e.getSource();
 		int v = new Integer(tf.getText()).intValue();
+
 		int key = e.getKeyCode();
 		if (key == 38 && v < 99)
 		{

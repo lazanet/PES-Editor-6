@@ -11,8 +11,7 @@
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * PES Editor is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * PES Editor is distributed in the hope that it will be useful, * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
@@ -89,6 +88,8 @@ public class Editor extends JFrame
 	private CSVMaker csvMaker;
 
 	private JMenuItem csvItem;
+	
+	private JMenuItem psdItem;
 
 	private JMenuItem open2Item;
 
@@ -130,28 +131,26 @@ public class Editor extends JFrame
 
 		flagChooser = new EmblemChooserDialog(this, of );
 		logoChooser = new LogoChooserDialog(this, of );
-		plImpDia = new PlayerImportDialog(this, of , of2);
+		plImpDia = new PlayerImportDialog(this, of, of2);
 		kitImpDia = new KitImportDialog(this, of2);
 		flagImpDia = new EmblemImportDialog(this, of2);
-		imageImpDia = new LogoImportDialog(this, of , of2);
-		playerDia = new PlayerDialog(this, of , plImpDia);
+		imageImpDia = new LogoImportDialog(this, of, of2);
+		playerDia = new PlayerDialog(this, of, plImpDia);
 
 		teamDia = new FormationDialog(this, of );
 
-		tranPanel = new TransferPanel(playerDia, of , teamDia);
+		tranPanel = new TransferPanel(playerDia, of, teamDia);
 
-		imagePanel = new LogoPanel( of , imageImpDia);
-		globalPanel = new GlobalPanel( of , tranPanel);
-		teamPan = new TeamPanel( of , tranPanel, flagChooser, of2, imagePanel,
-			globalPanel, kitImpDia, logoChooser);
-		flagPanel = new EmblemPanel( of , flagImpDia, teamPan);
+		imagePanel = new LogoPanel(of, imageImpDia);
+		globalPanel = new GlobalPanel(of, tranPanel);
+		teamPan = new TeamPanel(of, tranPanel, flagChooser, of2, imagePanel, globalPanel, kitImpDia, logoChooser);
+		flagPanel = new EmblemPanel(of, flagImpDia, teamPan);
 		teamPan.flagPan = flagPanel;
 
-		wenShop = new WENShopPanel( of );
-		stadPan = new StadiumPanel( of , teamPan);
-		leaguePan = new LeaguePanel( of );
-		importPanel = new ImportPanel( of , of2, wenShop, stadPan, leaguePan,
-			teamPan, flagPanel, imagePanel, tranPanel);
+		wenShop = new WENShopPanel(of );
+		stadPan = new StadiumPanel(of, teamPan);
+		leaguePan = new LeaguePanel(of );
+		importPanel = new ImportPanel(of, of2, wenShop, stadPan, leaguePan, teamPan, flagPanel, imagePanel, tranPanel);
 
 		helpDia = new HelpDialog(this);
 
@@ -196,6 +195,7 @@ public class Editor extends JFrame
 		convertItem = new JMenuItem("Convert OF2 > OF1");
 
 		csvItem = new JMenuItem("Make csv stats file...");
+		psdItem = new JMenuItem("Get PSD Stats...");
 		exitItem.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -228,7 +228,7 @@ public class Editor extends JFrame
 						importPanel.refresh();
 						flagPanel.refresh();
 						teamPan.list.setToolTipText("Double click to import kit from OF2");
-						if ( of .fileName != null)
+						if (of .fileName != null)
 							convertItem.setEnabled(true);
 						else
 							convertItem.setEnabled(false);
@@ -278,7 +278,7 @@ public class Editor extends JFrame
 					if (returnVal == JFileChooser.APPROVE_OPTION)
 					{
 						File dest = chooser.getSelectedFile();
-						if ( of .format == 0)
+						if (of .format == 0)
 						{
 							if ((PESUtils.getExtension(dest) == null) ||
 								!(PESUtils.getExtension(dest)
@@ -289,7 +289,7 @@ public class Editor extends JFrame
 									".xps");
 							}
 						}
-						if ( of .format == 2)
+						if (of .format == 2)
 						{
 							if ((PESUtils.getExtension(dest) == null) ||
 								!(PESUtils.getExtension(dest)
@@ -300,7 +300,7 @@ public class Editor extends JFrame
 									".psu");
 							}
 						}
-						if ( of .format == 3)
+						if (of .format == 3)
 						{
 							if ((PESUtils.getExtension(dest) == null) ||
 								!(PESUtils.getExtension(dest)
@@ -318,15 +318,10 @@ public class Editor extends JFrame
 							{
 								int n = JOptionPane
 									.showConfirmDialog(
-										getContentPane(),
-										dest.getName() +
+										getContentPane(), 							dest.getName() +
 										"\nAlready exists in:\n" +
 										dest.getParent() +
-										"\nAre you sure you want to replace this file?",
-										"Replace:  " + dest.getName(),
-										JOptionPane.YES_NO_OPTION,
-										JOptionPane.WARNING_MESSAGE,
-										null);
+										"\nAre you sure you want to replace this file?", 							"Replace:  " + dest.getName(), 							JOptionPane.YES_NO_OPTION, 							JOptionPane.WARNING_MESSAGE, 							null);
 								if (n == 0)
 								{
 									if (dest.delete() && of .saveXPS(dest))
@@ -346,7 +341,7 @@ public class Editor extends JFrame
 							else
 							{
 
-								if ( of .saveXPS(dest))
+								if (of .saveXPS(dest))
 								{
 									currentFile = dest;
 									setTitle("PES Editor 6 - " +
@@ -413,20 +408,13 @@ public class Editor extends JFrame
 							{
 								int n = JOptionPane
 									.showConfirmDialog(
-										getContentPane(),
-										dest.getName() +
+										getContentPane(), 							dest.getName() +
 										"\nAlready exists in:\n" +
 										dest.getParent() +
-										"\nAre you sure you want to replace this file?",
-										"Replace:  " + dest.getName(),
-										JOptionPane.YES_NO_OPTION,
-										JOptionPane.WARNING_MESSAGE,
-										null);
+										"\nAre you sure you want to replace this file?", 							"Replace:  " + dest.getName(), 							JOptionPane.YES_NO_OPTION, 							JOptionPane.WARNING_MESSAGE, 							null);
 								if (n == 0)
 								{
-									if (dest.delete() &&
-										csvMaker.makeFile( of , dest,
-											head, false, create))
+									if (dest.delete() && csvMaker.makeFile(of, dest, head, false, create))
 									{
 										saveOkMsg(dest);
 									}
@@ -439,8 +427,7 @@ public class Editor extends JFrame
 							else
 							{
 
-								if (csvMaker.makeFile( of , dest, head, false,
-										create))
+								if (csvMaker.makeFile(of, dest, head, false,create))
 								{
 									saveOkMsg(dest);
 								}
@@ -460,30 +447,31 @@ public class Editor extends JFrame
 			}
 		});
 
+		psdItem.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent c)
+			{
+				System.out.println("PSD init");
+				new PSDConnPanel();
+			}
+		});
+
 		convertItem.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent a)
 			{
-				System.arraycopy(of2.data, OptionFile.block[2], of .data,
-					OptionFile.block[2], OptionFile.blockSize[2]);
-				System.arraycopy(of2.data, OptionFile.block[3], of .data,
-					OptionFile.block[3], OptionFile.blockSize[3]);
-				System.arraycopy(of2.data, OptionFile.block[4], of .data,
-					OptionFile.block[4], OptionFile.blockSize[4]);
-				System.arraycopy(of2.data, OptionFile.block[5], of .data,
-					OptionFile.block[5], OptionFile.blockSize[5]);
-				System.arraycopy(of2.data, OptionFile.block[6], of .data,
-					OptionFile.block[6], OptionFile.blockSize[6]);
-				System.arraycopy(of2.data, OptionFile.block[7], of .data,
-					OptionFile.block[7], OptionFile.blockSize[7]);
-				System.arraycopy(of2.data, OptionFile.block[8], of .data,
-					OptionFile.block[8], OptionFile.blockSize[8]);
+				System.arraycopy(of2.data, OptionFile.block[2], of .data, 		OptionFile.block[2], OptionFile.blockSize[2]);
+				System.arraycopy(of2.data, OptionFile.block[3], of .data, 		OptionFile.block[3], OptionFile.blockSize[3]);
+				System.arraycopy(of2.data, OptionFile.block[4], of .data, 		OptionFile.block[4], OptionFile.blockSize[4]);
+				System.arraycopy(of2.data, OptionFile.block[5], of .data, 		OptionFile.block[5], OptionFile.blockSize[5]);
+				System.arraycopy(of2.data, OptionFile.block[6], of .data, 		OptionFile.block[6], OptionFile.blockSize[6]);
+				System.arraycopy(of2.data, OptionFile.block[7], of .data, 		OptionFile.block[7], OptionFile.blockSize[7]);
+				System.arraycopy(of2.data, OptionFile.block[8], of .data, 		OptionFile.block[8], OptionFile.blockSize[8]);
 				System.arraycopy(of2.data, 654732, of .data, 654732, 828);
 
 				 if (!of.isWE() && of2.isWE()) { Convert.allKitModel(of);
 				 Convert.allPlayers(of, Convert.WE2007_PES6); } if (of.isWE()
-				 && !of2.isWE()) { Convert.allPlayers(of,
-				 Convert.PES6_WE2007); }
+				 && !of2.isWE()) { Convert.allPlayers(of, 	 Convert.PES6_WE2007); }
 
 				flagPanel.refresh();
 				imagePanel.refresh();
@@ -504,12 +492,14 @@ public class Editor extends JFrame
 		help.add(helpItem);
 		help.add(aboutItem);
 		tool.add(csvItem);
+		tool.add(psdItem);
 		tool.add(convertItem);
 		mb.add(menu);
 		mb.add(tool);
 		mb.add(help);
 		setJMenuBar(mb);
 		csvItem.setEnabled(false);
+		psdItem.setEnabled(false);
 		open2Item.setEnabled(false);
 		saveItem.setEnabled(false);
 		saveAsItem.setEnabled(false);
@@ -560,30 +550,25 @@ public class Editor extends JFrame
 
 	private void saveFailMsg()
 	{
-		JOptionPane.showMessageDialog(getContentPane(), "Save failed", "Error",
-			JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(getContentPane(), "Save failed", "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	private void openFailMsg()
 	{
-		JOptionPane.showMessageDialog(getContentPane(), "Could not open file",
-			"Error", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(getContentPane(), "Could not open file", "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	private void saveOkMsg(File dest)
 	{
 		JOptionPane.showMessageDialog(getContentPane(), dest.getName() +
-			"\nSaved in:\n" + dest.getParent(),
-			"File Successfully Saved", JOptionPane.INFORMATION_MESSAGE);
+			"\nSaved in:\n" + dest.getParent(), "File Successfully Saved", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	private void illNameMsg()
 	{
 		JOptionPane
 			.showMessageDialog(
-				getContentPane(),
-				"File name cannot contain the following characters:\n\\ / : * ? \" < > |",
-				"Error", JOptionPane.ERROR_MESSAGE);
+				getContentPane(), 	"File name cannot contain the following characters:\n\\ / : * ? \" < > |", 	"Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	private void setIcon()
@@ -619,7 +604,7 @@ public class Editor extends JFrame
 			{
 				currentFile = chooser.getSelectedFile();
 				setTitle("PES Editor 6 - " + currentFile.getName());
-				Squads.fixAll( of );
+				Squads.fixAll(of );
 				flagPanel.refresh();
 				imagePanel.refresh();
 				tranPanel.refresh();
@@ -631,6 +616,7 @@ public class Editor extends JFrame
 				tabbedPane.setVisible(true);
 				importPanel.refresh();
 				csvItem.setEnabled(true);
+				psdItem.setEnabled(true);
 				open2Item.setEnabled(true);
 				saveItem.setEnabled(true);
 				saveAsItem.setEnabled(true);
@@ -648,6 +634,7 @@ public class Editor extends JFrame
 			else
 			{
 				csvItem.setEnabled(false);
+				psdItem.setEnabled(false);
 				open2Item.setEnabled(false);
 				saveItem.setEnabled(false);
 				saveAsItem.setEnabled(false);
@@ -694,7 +681,7 @@ public class Editor extends JFrame
 			try
 			{
 				FileInputStream in = new FileInputStream(settingsFile);
-				ObjectInputStream s = new ObjectInputStream( in );
+				ObjectInputStream s = new ObjectInputStream(in );
 				dir = (File) s.readObject();
 
 				s.close(); in .close();
@@ -716,8 +703,7 @@ public class Editor extends JFrame
 	private void about()
 	{
 		JOptionPane.showMessageDialog(
-				getContentPane(),
-				"PES Editor 6.0.6" +
+				getContentPane(), 	"PES Editor 6.0.6" +
 				"\nversion 2 (rebuilt by lazanet 2017)" +
 				"\n\nCopyright (c) 2008-9 Compulsion" +
 				"\npes_compulsion@yahoo.co.uk" +
@@ -735,9 +721,7 @@ public class Editor extends JFrame
 				"\nalong with this program.  If not, see www.gnu.org/licenses." +
 				"\n\nThanks to:" +
 				"\nAbhishek, Arsenal666, Big Boss, djsaunders, dragonskin, Flipper, gothi," +
-				"\nJayz123, JeffT, PLF, SFCMike, TheBoss, timo the owl, Tricky",
-				"About PES Editor 6", JOptionPane.PLAIN_MESSAGE,
-				getIcon());
+				"\nJayz123, JeffT, PLF, SFCMike, TheBoss, timo the owl, Tricky", 	"About PES Editor 6", JOptionPane.PLAIN_MESSAGE, 	getIcon());
 	}
 
 	public static void main(String[] args) throws IOException

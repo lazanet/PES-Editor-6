@@ -122,7 +122,7 @@ public class PositionPanel extends JPanel implements ActionListener
 		updateRegBox();
 	}
 
-	private void updateRegBox()
+	public void updateRegBox()
 	{
 		regBox.setActionCommand("n");
 		regBox.removeAllItems();
