@@ -174,7 +174,11 @@ public class PSDStatPaste extends JDialog
 					}
 					if (strIn(f,"Age"))
 					{
-						int age = Integer.parseInt(parts[1].trim().split(" ")[0].replaceAll("[\\D]", ""));
+						String tmp = parts[1].replace("("," ").replace(" "," ");
+						debugWrite("Age string>"+tmp+"<");
+						tmp = tmp.trim().split(" ")[0];
+						debugWrite("Age stringint>"+tmp);
+						int age = Integer.parseInt(tmp);
 						debugWrite("Found age > "+age);
 						retForm.genPanel.ageField.setText(Integer.toString(age));
 						continue;
