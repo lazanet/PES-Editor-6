@@ -177,6 +177,7 @@ public class PSDStatPaste extends JDialog
 						String tmp = parts[1].replace("("," ").replace(" "," ");
 						debugWrite("Age string>"+tmp+"<");
 						tmp = tmp.trim().split(" ")[0];
+						tmp = tmp.trim().replace(" ","");
 						debugWrite("Age stringint>"+tmp);
 						int age = Integer.parseInt(tmp);
 						debugWrite("Found age > "+age);
