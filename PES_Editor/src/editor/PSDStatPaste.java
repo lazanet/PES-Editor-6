@@ -125,7 +125,7 @@ public class PSDStatPaste extends JDialog
 						String[] posList = parts[1].split(",");
 						for (int z=0; z<posList.length; z++)
 						{
-							String tmp = posList[z].replace("★","").trim().toUpperCase();
+							String tmp = posList[z].replace("★","").replace("*","").trim().toUpperCase().replaceAll("[^a-zA-Z0-9]", "");
 							boolean getOut = false;
 							for (int k = 0; k < positionNames.length && !getOut; k++)
 								for (int k1 = 0; k1<positionNames[k].length && !getOut; k1++)
@@ -135,7 +135,7 @@ public class PSDStatPaste extends JDialog
 										tmp = positionNames[0][k1];
 										retForm.posPanel.checkBox[k1].setSelected(true);
 									}
-							if (strIn(posList[z],"★"))
+							 if (strIn(posList[z],"★") || strIn(posList[z],"*")) 
 							{
 								debugWrite("Reg:"+tmp+" ");
 								retForm.posPanel.updateRegBox();
@@ -280,7 +280,7 @@ public class PSDStatPaste extends JDialog
 				}
 				else
 				{
-					f = f.replace("★","").trim();
+					f = f.replace("★","").replace("*","").trim();
 					for (int z=0; z<abilityNames.length; z++)
 						if (strIn(abilityNames[z],f) && strIn(f,abilityNames[z]))
 						{
@@ -293,7 +293,8 @@ public class PSDStatPaste extends JDialog
 			}
 			catch(Exception e){ debugWrite("Error! "+e);}
 		}
-		String fs = foot+" foot/ "+side+" side";
+		String fs = foot+" foot / "+side+" side";
+		debugWrite("Foot/side combo:"+fs);
 		retForm.genPanel.footBox.setSelectedItem(fs);
 	}
 
