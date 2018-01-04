@@ -19,7 +19,6 @@
  * You should have received a copy of the GNU General Public License
  * along with PES Editor.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package editor;
 
 import java.awt.Color;
@@ -33,8 +32,9 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
 
-public class InfoPanel extends JScrollPane {
-	OptionFile of;
+public class InfoPanel extends JScrollPane
+{
+	OptionFile of ;
 
 	JEditorPane ta;
 
@@ -46,22 +46,23 @@ public class InfoPanel extends JScrollPane {
 
 	Document doc;
 
-	public InfoPanel(SelectByTeam sbt, OptionFile opf) {
+	public InfoPanel(SelectByTeam sbt, OptionFile opf)
+	{
 		super(VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_NEVER);
-		selector = sbt;
-		of = opf;
+		selector = sbt; of = opf;
 		listSquads = true;
 		init();
 	}
 
-	public InfoPanel(OptionFile opf) {
-		super(VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_NEVER);
-		of = opf;
+	public InfoPanel(OptionFile opf)
+	{
+		super(VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_NEVER); of = opf;
 		listSquads = false;
 		init();
 	}
 
-	private void init() {
+	private void init()
+	{
 		// setBorder(BorderFactory.createTitledBorder("Player info"));
 		ta = new JEditorPane();
 		ta.setEditable(false);
@@ -73,9 +74,12 @@ public class InfoPanel extends JScrollPane {
 		ta.setBackground(Color.black);
 		attr = new SimpleAttributeSet(sek.getInputAttributes());
 		doc = ta.getDocument();
-		if (listSquads) {
+		if (listSquads)
+		{
 			setPreferredSize(new Dimension(290, 493));
-		} else {
+		}
+		else
+		{
 			setPreferredSize(new Dimension(145, 493));
 		}
 		// ta.setVisible(false);
@@ -83,12 +87,16 @@ public class InfoPanel extends JScrollPane {
 		StyleConstants.setFontFamily(attr, "SansSerif");
 	}
 
-	public void refresh(int index1, int index2) {
+	public void refresh(int index1, int index2)
+	{
 		// System.out.println(index1 + ", " + index2);
 		ta.setText("");
-		if (index1 > 0 || index2 > 0) {
-			try {
-				if (index2 > 0) {
+		if (index1 > 0 || index2 > 0)
+		{
+			try
+			{
+				if (index2 > 0)
+				{
 					StyleConstants.setFontSize(attr, 10);
 					insertName(index1, index2);
 					doc.insertString(doc.getLength(), "\n", attr);
@@ -98,7 +106,9 @@ public class InfoPanel extends JScrollPane {
 					insertStats(index1, index2);
 					doc.insertString(doc.getLength(), "\n", attr);
 					insertAbilities(index1, index2);
-				} else {
+				}
+				else
+				{
 					StyleConstants.setFontSize(attr, 12);
 					insertName(index1, index2);
 					doc.insertString(doc.getLength(), "\n\n", attr);
@@ -113,20 +123,23 @@ public class InfoPanel extends JScrollPane {
 					insertSquads(index1);
 				}
 
-			} catch (BadLocationException e) {
 			}
+			catch (BadLocationException e)
+			{}
 			ta.setCaretPosition(0);
 		}
 		// ta.setVisible(true);
 	}
 
 	private void insertStats(int index1, int index2)
-			throws BadLocationException {
+	throws BadLocationException
+	{
 		StyleConstants.setForeground(attr, Color.white);
 		insertStat(Stats.wfa, index1, index2);
 		insertStat(Stats.wff, index1, index2);
 		// insertStat(stats.statX, index1, index2);
-		for (int i = 0; i < Stats.ability99.length; i++) {
+		for (int i = 0; i < Stats.ability99.length; i++)
+		{
 			insertStat(Stats.ability99[i], index1, index2);
 		}
 		insertStat(Stats.consistency, index1, index2);
@@ -134,128 +147,166 @@ public class InfoPanel extends JScrollPane {
 
 	}
 
-	private void insertRole(int index1, int index2) throws BadLocationException {
+	private void insertRole(int index1, int index2) throws BadLocationException
+	{
 		String text = "";
-		if (index1 > 0 && Stats.getValue(of, index1, Stats.gk) == 1) {
+		if (index1 > 0 && Stats.getValue( of , index1, Stats.gk) == 1)
+		{
 			text = "GK";
 		}
-		if (index2 > 0 && Stats.getValue(of, index2, Stats.gk) == 1) {
+		if (index2 > 0 && Stats.getValue( of , index2, Stats.gk) == 1)
+		{
 			text = text + "\t\tGK";
 		}
 		text = text + "\n";
 
-		if (index1 > 0 && Stats.getValue(of, index1, Stats.cwp) == 1) {
+		if (index1 > 0 && Stats.getValue( of , index1, Stats.cwp) == 1)
+		{
 			text = text + "CWP  ";
 		}
-		if (index1 > 0 && Stats.getValue(of, index1, Stats.cbt) == 1) {
+		if (index1 > 0 && Stats.getValue( of , index1, Stats.cbt) == 1)
+		{
 			text = text + "CB  ";
 		}
-		if (index2 > 0) {
+		if (index2 > 0)
+		{
 			text = text + "\t\t";
 		}
-		if (index2 > 0 && Stats.getValue(of, index2, Stats.cwp) == 1) {
+		if (index2 > 0 && Stats.getValue( of , index2, Stats.cwp) == 1)
+		{
 			text = text + "CWP  ";
 		}
-		if (index2 > 0 && Stats.getValue(of, index2, Stats.cbt) == 1) {
+		if (index2 > 0 && Stats.getValue( of , index2, Stats.cbt) == 1)
+		{
 			text = text + "CB  ";
 		}
 		text = text + "\n";
 
-		if (index1 > 0 && Stats.getValue(of, index1, Stats.sb) == 1) {
+		if (index1 > 0 && Stats.getValue( of , index1, Stats.sb) == 1)
+		{
 			text = text + "SB  ";
 		}
-		if (index1 > 0 && Stats.getValue(of, index1, Stats.wb) == 1) {
+		if (index1 > 0 && Stats.getValue( of , index1, Stats.wb) == 1)
+		{
 			text = text + "WB  ";
 		}
-		if (index1 > 0 && Stats.getValue(of, index1, Stats.dm) == 1) {
+		if (index1 > 0 && Stats.getValue( of , index1, Stats.dm) == 1)
+		{
 			text = text + "DM  ";
 		}
-		if (index2 > 0) {
+		if (index2 > 0)
+		{
 			text = text + "\t\t";
 		}
 
-		if (index2 > 0 && Stats.getValue(of, index2, Stats.sb) == 1) {
+		if (index2 > 0 && Stats.getValue( of , index2, Stats.sb) == 1)
+		{
 			text = text + "SB  ";
 		}
-		if (index2 > 0 && Stats.getValue(of, index2, Stats.wb) == 1) {
+		if (index2 > 0 && Stats.getValue( of , index2, Stats.wb) == 1)
+		{
 			text = text + "WB  ";
 		}
-		if (index2 > 0 && Stats.getValue(of, index2, Stats.dm) == 1) {
+		if (index2 > 0 && Stats.getValue( of , index2, Stats.dm) == 1)
+		{
 			text = text + "DM  ";
 		}
 		text = text + "\n";
 
-		if (index1 > 0 && Stats.getValue(of, index1, Stats.cm) == 1) {
+		if (index1 > 0 && Stats.getValue( of , index1, Stats.cm) == 1)
+		{
 			text = text + "CM  ";
 		}
-		if (index1 > 0 && Stats.getValue(of, index1, Stats.sm) == 1) {
+		if (index1 > 0 && Stats.getValue( of , index1, Stats.sm) == 1)
+		{
 			text = text + "SM  ";
 		}
-		if (index1 > 0 && Stats.getValue(of, index1, Stats.am) == 1) {
+		if (index1 > 0 && Stats.getValue( of , index1, Stats.am) == 1)
+		{
 			text = text + "AM  ";
 		}
-		if (index2 > 0) {
+		if (index2 > 0)
+		{
 			text = text + "\t\t";
 		}
 
-		if (index2 > 0 && Stats.getValue(of, index2, Stats.cm) == 1) {
+		if (index2 > 0 && Stats.getValue( of , index2, Stats.cm) == 1)
+		{
 			text = text + "CM  ";
 		}
-		if (index2 > 0 && Stats.getValue(of, index2, Stats.sm) == 1) {
+		if (index2 > 0 && Stats.getValue( of , index2, Stats.sm) == 1)
+		{
 			text = text + "SM  ";
 		}
-		if (index2 > 0 && Stats.getValue(of, index2, Stats.am) == 1) {
+		if (index2 > 0 && Stats.getValue( of , index2, Stats.am) == 1)
+		{
 			text = text + "AM  ";
 		}
 
 		text = text + "\n";
-		if (index1 > 0 && Stats.getValue(of, index1, Stats.ss) == 1) {
+		if (index1 > 0 && Stats.getValue( of , index1, Stats.ss) == 1)
+		{
 			text = text + "SS  ";
 		}
-		if (index1 > 0 && Stats.getValue(of, index1, Stats.cf) == 1) {
+		if (index1 > 0 && Stats.getValue( of , index1, Stats.cf) == 1)
+		{
 			text = text + "CF  ";
 		}
-		if (index1 > 0 && Stats.getValue(of, index1, Stats.wg) == 1) {
+		if (index1 > 0 && Stats.getValue( of , index1, Stats.wg) == 1)
+		{
 			text = text + "WG  ";
 		}
-		if (index2 > 0) {
+		if (index2 > 0)
+		{
 			text = text + "\t\t";
 		}
-		if (index2 > 0 && Stats.getValue(of, index2, Stats.ss) == 1) {
+		if (index2 > 0 && Stats.getValue( of , index2, Stats.ss) == 1)
+		{
 			text = text + "SS  ";
 		}
-		if (index2 > 0 && Stats.getValue(of, index2, Stats.cf) == 1) {
+		if (index2 > 0 && Stats.getValue( of , index2, Stats.cf) == 1)
+		{
 			text = text + "CF  ";
 		}
-		if (index2 > 0 && Stats.getValue(of, index2, Stats.wg) == 1) {
+		if (index2 > 0 && Stats.getValue( of , index2, Stats.wg) == 1)
+		{
 			text = text + "WG  ";
 		}
-		if (index2 > 0) {
+		if (index2 > 0)
+		{
 			StyleConstants.setFontSize(attr, 9);
 		}
 		doc.insertString(doc.getLength(), text, attr);
-		if (index2 > 0) {
+		if (index2 > 0)
+		{
 			StyleConstants.setFontSize(attr, 10);
 		}
 	}
 
 	private void insertAbilities(int index1, int index2)
-			throws BadLocationException {
-		for (int i = 0; i < Stats.abilitySpecial.length; i++) {
-			if ((i & 1) == 1) {
+	throws BadLocationException
+	{
+		for (int i = 0; i < Stats.abilitySpecial.length; i++)
+		{
+			if ((i & 1) == 1)
+			{
 				insertAbility(Stats.abilitySpecial[i], index1, index2,
-						Color.red);
-			} else {
+					Color.red);
+			}
+			else
+			{
 				insertAbility(Stats.abilitySpecial[i], index1, index2,
-						Color.green);
+					Color.green);
 			}
 		}
 		// StyleConstants.setForeground(attr, Color.yellow);
 		StyleConstants.setForeground(attr, Color.white);
 	}
 
-	private void insertSquads(int index1) throws BadLocationException {
-		if (listSquads) {
+	private void insertSquads(int index1) throws BadLocationException
+	{
+		if (listSquads)
+		{
 			StyleConstants.setForeground(attr, Color.white);
 			int i;
 			int t;
@@ -264,170 +315,201 @@ public class InfoPanel extends JScrollPane {
 			a = Squads.slot23 - 2;
 			do {
 				a = a + 2;
-				i = (of.toInt(of.data[a + 1]) << 8) | of.toInt(of.data[a]);
-				if (i == index1) {
+				i = ( of .toInt( of .data[a + 1]) << 8) | of .toInt( of .data[a]);
+				if (i == index1)
+				{
 					// System.out.println(a);
 
-					if (a < Squads.slot32) {
-						if (a >= Squads.slot32 - 64) {
-							t = 74;
-						} else {
+					if (a < Squads.slot32)
+					{
+						if (a >= Squads.slot32 - 64)
+							t = 72;
+						else
 							t = (a - Squads.slot23) / 46;
-						}
-					} else {
-						t = ((a - Squads.slot32) / 64) + 75;
 					}
+					else
+						t = ((a - Squads.slot32) / 64) + 73;
 					// System.out.println(t);
-					doc
-							.insertString(doc.getLength(), "\n"
-									+ selector.teamBox.getModel().getElementAt(
-											t), attr);
+					doc.insertString(doc.getLength(), "\n" + selector.teamBox.getModel().getElementAt(t), attr);
 				}
-			} while (a < 674442); // && i != p);
+			} while (a < 677072); // && i != p);
 		}
 	}
 
-	private void insertName(int index1, int index2) throws BadLocationException {
+	private void insertName(int index1, int index2) throws BadLocationException
+	{
 		StyleConstants.setForeground(attr, Color.white);
-		if (index1 > 0) {
-			doc.insertString(doc.getLength(), new Player(of, index1, 0).name,
-					attr);
+		if (index1 > 0)
+		{
+			doc.insertString(doc.getLength(), new Player( of , index1, 0).name,
+				attr);
 		}
-		if (index2 > 0) {
-			doc.insertString(doc.getLength(), "\t"
-					+ new Player(of, index2, 0).name, attr);
+		if (index2 > 0)
+		{
+			doc.insertString(doc.getLength(), "\t" +
+				new Player( of , index2, 0).name, attr);
 		}
 	}
 
 	private void insertAgeNat(int index1, int index2)
-			throws BadLocationException {
+	throws BadLocationException
+	{
 		StyleConstants.setForeground(attr, Color.white);
-		if (index1 > 0) {
-			doc.insertString(doc.getLength(), Stats.getString(of, index1,
-					Stats.nationality), attr);
+		if (index1 > 0)
+		{
+			doc.insertString(doc.getLength(), Stats.getString( of , index1,
+				Stats.nationality), attr);
 		}
-		if (index2 > 0) {
-			doc.insertString(doc.getLength(), "\t"
-					+ Stats.getString(of, index2, Stats.nationality), attr);
+		if (index2 > 0)
+		{
+			doc.insertString(doc.getLength(), "\t" +
+				Stats.getString( of , index2, Stats.nationality), attr);
 		}
-		if (index1 > 0) {
-			doc.insertString(doc.getLength(), "\nAge: "
-					+ Stats.getString(of, index1, Stats.age), attr);
+		if (index1 > 0)
+		{
+			doc.insertString(doc.getLength(), "\nAge: " +
+				Stats.getString( of , index1, Stats.age), attr);
 		}
-		if (index2 > 0) {
-			doc.insertString(doc.getLength(), "\tAge: "
-					+ Stats.getString(of, index2, Stats.age), attr);
+		if (index2 > 0)
+		{
+			doc.insertString(doc.getLength(), "\tAge: " +
+				Stats.getString( of , index2, Stats.age), attr);
 		}
 	}
 
-	private void insertPhys(int index1, int index2) throws BadLocationException {
+	private void insertPhys(int index1, int index2) throws BadLocationException
+	{
 		StyleConstants.setForeground(attr, Color.white);
-		if (index1 > 0) {
+		if (index1 > 0)
+		{
 			String footSide = "LF/";
-			if (Stats.getValue(of, index1, Stats.foot) == 1) {
-				switch (Stats.getValue(of, index1, Stats.favSide)) {
-				case 0:
-					footSide = footSide + "LS";
-					break;
-				case 1:
-					footSide = footSide + "RS";
-					break;
-				case 2:
-					footSide = footSide + "BS";
-					break;
+			if (Stats.getValue( of , index1, Stats.foot) == 1)
+			{
+				switch (Stats.getValue( of , index1, Stats.favSide))
+				{
+					case 0:
+						footSide = footSide + "LS";
+						break;
+					case 1:
+						footSide = footSide + "RS";
+						break;
+					case 2:
+						footSide = footSide + "BS";
+						break;
 				}
-			} else {
+			}
+			else
+			{
 				footSide = "RF/";
-				switch (Stats.getValue(of, index1, Stats.favSide)) {
-				case 0:
-					footSide = footSide + "RS";
-					break;
-				case 1:
-					footSide = footSide + "LS";
-					break;
-				case 2:
-					footSide = footSide + "BS";
-					break;
+				switch (Stats.getValue( of , index1, Stats.favSide))
+				{
+					case 0:
+						footSide = footSide + "RS";
+						break;
+					case 1:
+						footSide = footSide + "LS";
+						break;
+					case 2:
+						footSide = footSide + "BS";
+						break;
 				}
 			}
 			footSide = footSide + ", ";
-			doc.insertString(doc.getLength(), footSide
-					+ Stats.getString(of, index1, Stats.height) + "cm, "
-					+ Stats.getString(of, index1, Stats.weight) + "Kg", attr);
+			doc.insertString(doc.getLength(), footSide +
+				Stats.getString( of , index1, Stats.height) + "cm, " +
+				Stats.getString( of , index1, Stats.weight) + "Kg", attr);
 		}
-		if (index2 > 0) {
-			if (index1 > 0) {
+		if (index2 > 0)
+		{
+			if (index1 > 0)
+			{
 				doc.insertString(doc.getLength(), "\t", attr);
-			} else {
+			}
+			else
+			{
 				doc.insertString(doc.getLength(), "\t\t", attr);
 			}
 			String footSide = "LF/";
-			if (Stats.getValue(of, index2, Stats.foot) == 1) {
-				switch (Stats.getValue(of, index2, Stats.favSide)) {
-				case 0:
-					footSide = footSide + "LS";
-					break;
-				case 1:
-					footSide = footSide + "RS";
-					break;
-				case 2:
-					footSide = footSide + "BS";
-					break;
+			if (Stats.getValue( of , index2, Stats.foot) == 1)
+			{
+				switch (Stats.getValue( of , index2, Stats.favSide))
+				{
+					case 0:
+						footSide = footSide + "LS";
+						break;
+					case 1:
+						footSide = footSide + "RS";
+						break;
+					case 2:
+						footSide = footSide + "BS";
+						break;
 				}
-			} else {
+			}
+			else
+			{
 				footSide = "RF/";
-				switch (Stats.getValue(of, index2, Stats.favSide)) {
-				case 0:
-					footSide = footSide + "RS";
-					break;
-				case 1:
-					footSide = footSide + "LS";
-					break;
-				case 2:
-					footSide = footSide + "BS";
-					break;
+				switch (Stats.getValue( of , index2, Stats.favSide))
+				{
+					case 0:
+						footSide = footSide + "RS";
+						break;
+					case 1:
+						footSide = footSide + "LS";
+						break;
+					case 2:
+						footSide = footSide + "BS";
+						break;
 				}
 			}
 			footSide = footSide + ", ";
-			doc.insertString(doc.getLength(), footSide
-					+ Stats.getString(of, index2, Stats.height) + "cm, "
-					+ Stats.getString(of, index2, Stats.weight) + "Kg", attr);
+			doc.insertString(doc.getLength(), footSide +
+				Stats.getString( of , index2, Stats.height) + "cm, " +
+				Stats.getString( of , index2, Stats.weight) + "Kg", attr);
 		}
 	}
 
 	private void insertStat(Stat stat, int index1, int index2)
-			throws BadLocationException {
-		int v1 = Stats.getValue(of, index1, stat);
-		int v2 = Stats.getValue(of, index2, stat);
-		String s1 = Stats.getString(of, index1, stat);
-		String s2 = Stats.getString(of, index2, stat);
+	throws BadLocationException
+	{
+		int v1 = Stats.getValue( of , index1, stat);
+		int v2 = Stats.getValue( of , index2, stat);
+		String s1 = Stats.getString( of , index1, stat);
+		String s2 = Stats.getString( of , index2, stat);
 		doc.insertString(doc.getLength(), "\n" + stat.name + "\t", attr);
-		if (index1 > 0) {
+		if (index1 > 0)
+		{
 			setStatColour(stat, v1);
 			doc.insertString(doc.getLength(), s1, attr);
 		}
-		if (index2 > 0) {
-			if (index1 > 0) {
+		if (index2 > 0)
+		{
+			if (index1 > 0)
+			{
 				int dif = v1 - v2;
 				String comp = " ";
 				int div = 3;
 				int add = 1;
-				if (stat == Stats.wfa || stat == Stats.wff
-						|| stat == Stats.consistency || stat == Stats.condition) {
+				if (stat == Stats.wfa || stat == Stats.wff ||
+					stat == Stats.consistency || stat == Stats.condition)
+				{
 					div = 1;
 					add = 0;
 				}
-				if (dif > 0) {
+				if (dif > 0)
+				{
 					dif = (dif / div) + add;
-					for (int i = 0; i < dif && i < 10; i++) {
+					for (int i = 0; i < dif && i < 10; i++)
+					{
 						comp = comp + "*";
 					}
 					StyleConstants.setForeground(attr, Color.green);
 					doc.insertString(doc.getLength(), comp, attr);
 				}
-				if (dif < 0) {
+				if (dif < 0)
+				{
 					dif = (dif / -div) + add;
-					for (int i = 0; i < dif && i < 10; i++) {
+					for (int i = 0; i < dif && i < 10; i++)
+					{
 						comp = comp + "*";
 					}
 					StyleConstants.setForeground(attr, Color.red);
@@ -442,33 +524,50 @@ public class InfoPanel extends JScrollPane {
 	}
 
 	private void insertAbility(Stat stat, int index1, int index2, Color colour)
-			throws BadLocationException {
+	throws BadLocationException
+	{
 		StyleConstants.setForeground(attr, colour);
 		doc.insertString(doc.getLength(), "\n" + stat.name + "\t", attr);
-		if (index1 > 0 && Stats.getValue(of, index1, stat) == 1) {
+		if (index1 > 0 && Stats.getValue( of , index1, stat) == 1)
+		{
 			doc.insertString(doc.getLength(), "O", attr);
 		}
-		if (index2 > 0 && Stats.getValue(of, index2, stat) == 1) {
+		if (index2 > 0 && Stats.getValue( of , index2, stat) == 1)
+		{
 			doc.insertString(doc.getLength(), "\tO", attr);
 		}
 	}
 
-	private void setStatColour(Stat stat, int v) {
-		if (stat == Stats.wfa || stat == Stats.wff || stat == Stats.consistency
-				|| stat == Stats.condition) {
-			if (v == 7) {
+	private void setStatColour(Stat stat, int v)
+	{
+		if (stat == Stats.wfa || stat == Stats.wff || stat == Stats.consistency ||
+			stat == Stats.condition)
+		{
+			if (v == 7)
+			{
 				StyleConstants.setForeground(attr, Color.red);
-			} else if (v == 6) {
+			}
+			else if (v == 6)
+			{
 				StyleConstants.setForeground(attr, Color.orange);
 			}
-		} else {
-			if (v > 94) {
+		}
+		else
+		{
+			if (v > 94)
+			{
 				StyleConstants.setForeground(attr, Color.red);
-			} else if (v > 89) {
+			}
+			else if (v > 89)
+			{
 				StyleConstants.setForeground(attr, Color.orange);
-			} else if (v > 79) {
+			}
+			else if (v > 79)
+			{
 				StyleConstants.setForeground(attr, Color.yellow);
-			} else if (v > 74) {
+			}
+			else if (v > 74)
+			{
 				StyleConstants.setForeground(attr, new Color(183, 255, 0));
 			}
 		}
