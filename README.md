@@ -11,8 +11,12 @@ Based on PES Editor 6 editor (GPLv3 licenced) [purplehaze / Compulsion](http://w
 * Importing players by ID, allowing an import of only certain players.
 * Option to import players but not update the club teams, national teams and classic teams.
 
-### Binary builds
+### Stable builds
 [HERE!](https://github.com/lazanet/PES-Editor-6/releases/)
+
+### Nightly builds
+Usualy more recent but less stable versions. Built with newest Java.
+[HERE!](https://ci.appveyor.com/project/lazanet/pes-editor-6/build/artifacts)
  
 ### TODO
 * Online rooster generator (maybe)
