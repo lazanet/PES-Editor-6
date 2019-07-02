@@ -1,7 +1,7 @@
 # PES-Editor-6
 ###### Fork of compulsion's excellent PES6 Editor
 \
-Based on PES Editor 6 editor (GPLv3 licenced) [purplehaze / Compulsion](http://www.purplehaze.eclipse.co.uk/downloads.html), released by [juce](https://bitbucket.org/juce/peseditor606) with his CSV import feature and PeterC10's improvements. 
+Based on PES Editor 6 (GPLv3 licenced) by [purplehaze / Compulsion](http://www.purplehaze.eclipse.co.uk/downloads.html), released by [juce](https://bitbucket.org/juce/peseditor606) with his CSV import feature and [PeterC10's improvements](https://github.com/PeterC10/PESEditor). 
 
 ### New features
 * PSD search (based on [pesstatsdatabase-API](https://github.com/lazanet/pesstatsdatabase-API) of mine) - at Tools->Get PSD Stats
@@ -16,6 +16,7 @@ Based on PES Editor 6 editor (GPLv3 licenced) [purplehaze / Compulsion](http://w
 
 ### Nightly builds
 Usualy more recent but less stable versions. Built with newest Java.
+\
 [HERE!](https://ci.appveyor.com/project/lazanet/pes-editor-6/build/artifacts)
  
 ### TODO
@@ -45,4 +46,3 @@ Fork this repo and send pull requests :)
  *
  * You should have received a copy of the GNU General Public License
  * along with PES Editor.  If not, see <http://www.gnu.org/licenses/>.
- *
