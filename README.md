@@ -15,7 +15,7 @@ Based on PES Editor 6 (GPLv3 licenced) by [purplehaze / Compulsion](http://www.p
 [HERE!](https://github.com/lazanet/PES-Editor-6/releases/)
 
 ### Nightly builds
-Usualy more recent but less stable versions. Built with newest Java.
+Usually more recent but less stable versions. Built with newest Java JDK.
 \
 [HERE!](https://ci.appveyor.com/project/lazanet/pes-editor-6/build/artifacts)
  
